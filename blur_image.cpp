@@ -32,7 +32,7 @@ void blur_image(const cv::Mat& input, cv::Mat& output)
           int yn = y + i;
           // Handle borders
           if ((xn > 0 && yn > 0) && (xn < input.cols && yn < input.rows)) {
-            ct += 1;
+            ct++;
             red_avg += input.at<cv::Vec3b>(yn,xn)[2];
             green_avg += input.at<cv::Vec3b>(yn,xn)[1];
   					blue_avg += input.at<cv::Vec3b>(yn,xn)[0];

@@ -33,7 +33,7 @@ void blur_image(const cv::Mat& input, cv::Mat& output)
           int yn = y + i;
           // Handle borders
           if ((xn > 0 && yn > 0) && (xn < input.cols && yn < input.rows)) {
-            ct += 1;
+            ct++;
             red_avg += input.at<cv::Vec3b>(yn,xn)[2];
             green_avg += input.at<cv::Vec3b>(yn,xn)[1];
   					blue_avg += input.at<cv::Vec3b>(yn,xn)[0];
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	blur_image(input, output);
 	auto end_time = std::chrono::high_resolution_clock::now();
 	chrono::duration<float, milli> duration_ms = end_time - start_time;
-	printf("Image blurring, time elapsed: %f ms\n", duration_ms.count());
+	printf("Image blurring with threads, time elapsed: %f ms\n", duration_ms.count());
 
 	// Resize and show images
 	namedWindow("Input", cv::WINDOW_NORMAL);
