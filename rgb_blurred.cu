@@ -64,8 +64,8 @@ void blur_image(const cv::Mat& input, cv::Mat& output)
 	cudaMalloc(&d_output, o_bytes);
 
 	// Copy data from OpenCV input image to device memory
-	cudaMemcpy(d_input, input.ptr(), bytes, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_output, input.ptr(), bytes, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_input, input.ptr(), i_bytes, cudaMemcpyHostToDevice);
+	cudaMemcpy(d_output, input.ptr(), i_bytes, cudaMemcpyHostToDevice);
 
 	// Specify a reasonable block size
 	const dim3 block(16, 16);
@@ -86,7 +86,7 @@ void blur_image(const cv::Mat& input, cv::Mat& output)
 	cudaDeviceSynchronize();
 
 	// Copy back data from destination device meory to OpenCV output image
-	cudaMemcpy(output.ptr(), d_output, bytes, cudaMemcpyDeviceToHost);
+	cudaMemcpy(output.ptr(), d_output, o_bytes, cudaMemcpyDeviceToHost);
 
 	// Free the device memory
 	cudaFree(d_input);
