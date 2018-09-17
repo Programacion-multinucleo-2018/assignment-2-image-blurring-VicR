@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 	}
 
 	//Output image
-	cv::Mat output(input.rows, input.cols, CV_8UC1);
+	cv::Mat output(input.rows, input.cols, input.type());
 	//Call the wrapper function
 	blur_image(input, output);
 
